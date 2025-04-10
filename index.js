@@ -1,12 +1,17 @@
 const express = require('express');
 const mongoose = require('mongoose');
+require('dotenv').config();
+
 
 const app = express()
 const port = 3000
 
 app.use(express.json());
 
-mongoose.connect('mongodb://127.0.0.1:27017/task3db')
+mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
     .then(()=> console.log("connected"))
     .catch((err)=>console.error('not connected',err));
 
